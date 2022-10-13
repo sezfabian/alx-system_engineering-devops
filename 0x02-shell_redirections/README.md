@@ -1,1 +1,2 @@
-# Task 0x02-shell_redirections
+#This as  shell redirections course progs
+#no more than this
