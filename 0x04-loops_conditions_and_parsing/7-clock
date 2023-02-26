@@ -14,5 +14,4 @@ do
     m=$(( m + 1 ))
   done
   h=$(( h + 1 ))
-echo "Hour: $h"
 done
