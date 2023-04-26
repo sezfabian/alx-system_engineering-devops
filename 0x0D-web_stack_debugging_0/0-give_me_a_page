@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Script to run Apache
 echo 'ServerName localhost' >> /etc/apache2/apache2.conf
-apachectl configtest
 sudo service apache2 start
-
+sudo systemctl status apache2
