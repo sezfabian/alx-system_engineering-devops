@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Script that configures a custom 404 page
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/error_page.html
+
+sudo sed -i '/listen \[\:\:\]\:80 default_server/ a \\n\terror_page 404 /error_page.html;' /etc/nginx/sites-enabled/default
+sudo sed -i '/# pass PHP scripts to FastCGI server/ i \\tlocation = /error_page.html {\n\t\troot /usr/share/nginx/html;\n\t}\n' /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
