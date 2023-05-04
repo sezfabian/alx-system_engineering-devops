@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-sudo apt install -y nginx
+# Using your debugging skills, find out what’s keeping your Ubuntu container’s Nginx
+sudo apt install nginx -y
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
-pkill-o nginx
