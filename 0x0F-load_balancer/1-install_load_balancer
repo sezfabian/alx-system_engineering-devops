@@ -1,11 +1,41 @@
 #!/usr/bin/env bash
-# Install and configure HAproxy on your lb-01 server
+# Install and configure HAproxy on your lb-01 server.
 
-sudo apt -y update 
-sudo apt-get -y install haproxy=2.0.\*
+apt-get update -y
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-1.8
+apt-get update -y
+apt-get install -y haproxy=1.8.\*
 
-sudo sed -i "$ a \\\nfrontend cheruiyotfabian\n\tmode http\n\tbind *:80\n\tdefault_backend cheruiyotfabian-backend" /etc/haproxy/haproxy.cfg
-sudo sed -i "$ a \\\nbackend cheruiyotfabian-backend\n\tmode http\n\tbalance roundrobin\n\tserver 170738-web-01 52.86.36.245:80 check\n\tserver 170738-web-02 100.26.223.28:80 check" /etc/haproxy/haproxy.cfg
+echo "ENABLED=1" >> /etc/default/haproxy
+mv /etc/haproxy/haproxy.cfg{,.original}
+touch /etc/haproxy/haproxy.cfg
 
-sudo chmod u+x /etc/init.d/haproxy
-sudo service haproxy restart
+printf %s "global
+    log 127.0.0.1 local0 notice
+    maxconn 2000
+    user haproxy
+    group haproxy
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    retries 3
+    option redispatch
+    timeout connect  5000
+    timeout client  10000
+    timeout server  10000
+listen load_balancer
+    bind 0.0.0.0:80
+    mode http
+    stats enable
+    stats uri /haproxy?stats
+    balance roundrobin
+    option httpclose
+    option forwardfor
+    server 85939-web-01 54.237.73.27:80 check
+    server 85939-web-02 34.232.76.169:80 check
+" >> /etc/haproxy/haproxy.cfg
+
+sudo service haproxy start
