@@ -5,7 +5,7 @@ sudo apt -y update
 sudo apt-get -y install haproxy=2.0.\*
 
 sudo sed -i "$ a \\\nfrontend cheruiyotfabian\n\tmode http\n\tbind *:80\n\tdefault_backend cheruiyotfabian-backend" /etc/haproxy/haproxy.cfg
-sudo sed -i "$ a \\\nbackend cheruiyotfabian-backend\n\tmode http\n\tbalance roundrobin\n\tserver 170738-web-01 52.86.36.245:80 check\n\tserver 170738-web-02 100.25.45.160:80 check" /etc/haproxy/haproxy.cfg
+sudo sed -i "$ a \\\nbackend cheruiyotfabian-backend\n\tmode http\n\tbalance roundrobin\n\tserver 170738-web-01 52.86.36.245:80 check\n\tserver 170738-web-02 100.26.223.28:80 check" /etc/haproxy/haproxy.cfg
 
 sudo chmod u+x /etc/init.d/haproxy
 sudo service haproxy restart
