@@ -1,0 +1,23 @@
+What happens when you type https://www.google.com in your browser and press Enter?
+
+The behind the scenes process involves a series of intricate steps and technologies working together seamlessly to deliver the desired web content to your screen. In this article, we will explore the journey from entering a domain name to experiencing a fully rendered webpage. Let's dive in and uncover the magic of web browsing.
+
+DNS Request: The process begins when you enter a domain name, such as "google.com," into your browser's address bar. Your browser sends a DNS (Domain Name System) request to a DNS server, seeking the IP address associated with the domain. The DNS server responds by providing the IP address, enabling your browser to establish a connection with the server hosting the website.
+
+TCP/IP: With the IP address in hand, your browser initiates a connection using TCP/IP (Transmission Control Protocol/Internet Protocol), the foundation of communication on the internet. TCP establishes a reliable connection between your browser and the server, ensuring that data packets are transmitted accurately and in the correct order.
+
+Firewall: As the connection is established, your data passes through firewalls, which act as security barriers. Firewalls examine incoming and outgoing traffic, applying predefined rules to allow or block specific data packets based on security policies. They protect against unauthorized access and potential threats.
+
+HTTPS/SSL: To safeguard your data during transmission, the connection between your browser and the server may utilize HTTPS (Hypertext Transfer Protocol Secure) or SSL (Secure Sockets Layer)/TLS (Transport Layer Security) encryption. HTTPS encrypts the data exchanged between your browser and the server, protecting it from eavesdropping and manipulation by unauthorized parties.
+
+Load Balancer: In cases where a website experiences high traffic or relies on multiple servers, a load balancer comes into play. Load balancers distribute incoming requests across multiple servers, ensuring efficient utilization of resources and preventing overloading of any individual server. This helps maintain optimal performance and availability of the website.
+
+Web Server: Once the connection is established, your browser sends an HTTP/HTTPS request to the web server hosting the website. The web server receives the request, processes it, and retrieves the requested resources, such as HTML, CSS, JavaScript files, and media assets. It then generates a response to send back to your browser.
+
+Application Server: In some cases, websites with dynamic content or complex functionality rely on application servers. Application servers handle application logic, process user input, retrieve data from databases, and generate dynamic web content. They work in conjunction with the web server to deliver personalized and interactive experiences.
+
+Database: Websites often rely on databases to store and retrieve data. Application servers communicate with databases to fetch and update information dynamically. Databases ensure data integrity, reliability, and scalability, allowing websites to handle user interactions, store user preferences, and deliver personalized content.
+
+As all the necessary components work together, your browser receives the response from the server, containing HTML, CSS, JavaScript, and other resources required to render the webpage.
+
+Your browser then interprets and processes these files, applying styles, executing scripts, and assembling the webpage. Finally, the fully rendered webpage is displayed on your screen, ready for you to explore, interact with, and enjoy.
