@@ -27,11 +27,11 @@ def todo(id):
     url1 = 'https://jsonplaceholder.typicode.com/users/' + str(id) + '/todos'
     user = json.loads((requests.get(url)).text)
     tasks = json.loads((requests.get(url1)).text)
-    filename = str(id) + ".csv"
+    filename = id + ".csv"
     with open(filename, "w", newline='') as csv_file:
         csv_wr = writer(csv_file, quoting=QUOTE_ALL)
         for task in tasks:
-            csv_wr.writerow([str(id), user['name'],
+            csv_wr.writerow([int(id), user['name'],
                             task['completed'], task['title']])
 
 
