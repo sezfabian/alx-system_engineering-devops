@@ -1,0 +1,35 @@
+Postmortem: Web Server Outage - Duration: 1 hour
+
+Issue Summary:
+The web server experienced a 1-hour outage from 9:00 PM to 10:00 PM (EAT) due to a typo in the WordPress wp-settings.php file. The typo caused an internal server error (HTTP 500) and affected the main service. During the outage, users experienced complete unavailability of the website, and 100% of users were affected.
+
+Timeline:
+
+9:10 PM: The issue was detected when users reported being unable to access the website and received an internal server error.
+An engineer noticed the HTTP 500 error and began investigating the issue.
+The web server logs indicated the presence of the wp-settings.php file and its associated error message.
+Initial assumptions were made that the error was caused by a misconfiguration in the web server or the database.
+I started by reviewing php and Apache2 configuration files and the database connection settings, but found no issues.
+After further analysis using strace, I discovered the error was caused by an attemp to open "/var/www/html/wp-includes/class-wp-locale.phpp" which does not exist.
+9:30 PM: The incident was escalated to the development team, providing details of the typo in the wp-settings.php file.
+The development team quickly identified and corrected the typo by replacing "phpp" with "php" in the wp-settings.php file.
+10:00 PM: The web server was restarted, and the website became accessible again, resolving the issue.
+Root Cause and Resolution:
+The root cause of the outage was a typographical error in the wp-settings.php file. The typo resulted in the incorrect inclusion of a PHP file, leading to an internal server error (HTTP 500). Specifically, the typo "phpp" was used instead of "php" in the file path.
+
+To resolve the issue, the development team manually corrected the typo in the wp-settings.php file by replacing "phpp" with "php". After the correction, the web server was restarted, allowing the website to function normally again.
+
+Corrective and Preventative Measures:
+To prevent similar outages in the future, the following measures have been identified:
+
+Implementation of automated code reviews or linting tools to catch syntax errors and typos before deploying code changes.
+Enhancing the deployment process with pre-flight checks, including verifying the integrity of critical files.
+Conducting thorough testing, including functional and regression testing, to catch errors in code and configuration changes.
+Improving the documentation and review process for critical configuration files to minimize the risk of typographical errors.
+Tasks to address the issue:
+
+Implement automated code reviews or linting tools to catch syntax errors during the development process.
+Enhance the deployment pipeline with pre-flight checks to ensure the integrity of critical files.
+Develop and follow a comprehensive testing strategy, including functional and regression testing, to detect errors before deploying changes.
+Update documentation to emphasize the importance of reviewing and verifying critical configuration files during deployments.
+By implementing these corrective and preventative measures, we aim to minimize the risk of similar outages caused by typographical errors and improve the overall reliability of our web services.

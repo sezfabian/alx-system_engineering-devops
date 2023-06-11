@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-Module to retrieve subscriber count for a subreddit
+function that queries the Reddit API
+Returns the number of total subscribers for a given subreddit.
+If an invalid subreddit is given, the function should return 0.
 """
 import requests
 
@@ -15,6 +17,6 @@ def number_of_subscribers(subreddit):
 
     if response.status_code == 404:
         return (0)
-    if response.status_code == 200:
+    else if response.status_code == 200:
         req = int(response.json().get("data").get("subscribers"))
         return (req)
